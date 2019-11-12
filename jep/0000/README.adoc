@@ -1,0 +1,198 @@
+= JEP-0000: Jenkins Component Ownership
+:toc: preamble
+:toclevels: 3
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+
+
+.Metadata
+[cols="1h,1"]
+|===
+| JEP
+| 0000
+
+| Title
+| :bulb: Jenkins Component Ownership :bulb:
+
+| Sponsor
+| :bulb: link:https://github.com/daniel-beck[Daniel Beck] :bulb:
+
+// Use the script `set-jep-status <jep-number> <status>` to update the status.
+| Status
+| Not Submitted :information_source:
+
+| Type
+| Process
+
+| Created
+| 2019-08-02
+
+| BDFL-Delegate
+| TBD
+
+//
+//
+// Uncomment if there is an associated placeholder JIRA issue.
+//| JIRA
+//| :bulb: https://issues.jenkins-ci.org/browse/JENKINS-nnnnn[JENKINS-nnnnn] :bulb:
+//
+//
+// Uncomment if discussion will occur in forum other than jenkinsci-dev@ mailing list.
+//| Discussions-To
+//| :bulb: Link to where discussion and final status announcement will occur :bulb:
+//
+//
+// Uncomment if this JEP depends on one or more other JEPs.
+//| Requires
+//| :bulb: JEP-NUMBER, JEP-NUMBER... :bulb:
+//
+//
+// Uncomment and fill if this JEP is rendered obsolete by a later JEP
+//| Superseded-By
+//| :bulb: JEP-NUMBER :bulb:
+//
+//
+// Uncomment when this JEP status is set to Accepted, Rejected or Withdrawn.
+//| Resolution
+//| :bulb: Link to relevant post in the jenkinsci-dev@ mailing list archives :bulb:
+
+|===
+
+== Abstract
+
+This JEP defines the meaning of component ownership and the processes related to it, such as taking over dormant plugins, adding or removing maintainers, etc.
+
+
+== Specification
+
+=== Roles
+
+==== Committer
+
+A component's committer is a GitHub account with Write or Admin permission on the component's GitHub repository.
+
+==== Maintainer
+
+A component's maintainer is a Jenkins community account that is allowed to release a component.
+If a component has no maintainers, it is considered unmaintained.
+
+While it can make sense to have individuals controlling committer accounts without having access to a maintainer account, all maintainer account holders should be committers as well.
+This is not enforced through technical means, but maintainers can request to have any GitHub account granted Write or Admin permission on the corresponding repository.
+
+==== Owner
+
+A component's owner is a Jenkins community account that is allowed to make governance decisions for the component, such as transferring ownership or adding and removing maintainers.
+A component can have any number of owners.
+If a component has no explicitly defined owners, all maintainers are considered owners.
+
+==== Security Contact
+
+A component's security contact is either of the following:
+
+* A Jenkins community account that will be informed about security issues reported in the component.
+* An email address that will be informed about security issues reported in the component. This is limited to some organizations. The definition of this restriction is outside the scope of this JEP.
+
+A component can have a single security contact.
+// TODO Fix Jira to allow multiple.
+If a component has no explicitly defined security contact, one of the owners will be chosen.
+
+//==== Ownership Model
+//
+//The ownership model for a given component defines how governance decisions about a component are to be made in the absence of current owners.
+//
+//* *Transferable*: Plugin ownership can be transferred to other accounts at the discretion of Jenkins project administrators or other individuals empowered to modify the component metadata storage.
+//* *Nontransferable*: Plugin ownership cannot be transferred to other accounts. Plugin distribution may be suspended, but it will not be
+
+=== Metadata Storage
+
+The Jenkins project maintains a public GitHub repository containing YAML files that define basic plugin metadata necessary to identify a component:
+
+* Artifact ID
+* One or more Group ID/Artifact ID paths (Maven repository)
+* The canonical GitHub repository
+
+Additionally, the file contains any of the following:
+
+* The list of owners (Jenkins community LDAP account)
+* The list of maintainers (Jenkins community LDAP account)
+* The security Contact (email and/or Jenkins community LDAP account)
+//* The ownership model, if different from the default
+
+=== Processes
+
+Processes are largely controlled 
+
+==== Transferring ownership
+
+A maintainer is
+
+== Motivation
+
+The Jenkins project is a loosely organized collective of open source contributors.
+Plugins are maintained by individuals or groups, on their own or on behalf of a company.
+
+This means that everything from single-maintainer plugins to plugins developed by a group of people on behalf of a corporation needs to be supported in the process.
+
+=== Three-Tier System
+
+To ensure the most flexibility, a three tier system is employed for component ownership for most flexibility:
+
+* *Owners* have ultimate control over their components and can request any governance changes via the Jenkins project issue tracker.
+  In the case of plugins maintained on behalf of an organization, this could be an account representing the organization rather than an individual.
+* *Maintainers* are empowered to independently release the component.
+  These are typically, but not always, individuals.
+* *Committers* can perform changes in the source code repository, but not release them to users.
+
+
+[TIP]
+====
+Explain why the existing code base or process is inadequate to address the problem that the JEP solves.
+This section may also contain any historical context such as how things were done before this proposal.
+
+* Do not discuss design choices or alternative designs that were rejected - those belong in the Reasoning section.
+====
+
+== Reasoning
+
+[TIP]
+====
+Explain why particular design decisions were made.
+Describe alternate designs that were considered and related work. For example, how the feature is supported in other systems.
+Provide evidence of consensus within the community and discuss important objections or concerns raised during discussion.
+
+* Use sub-headings to organize this section for ease of readability.
+* Do not talk about history or why this needs to be done - that is part of Motivation section.
+====
+
+== Backwards Compatibility
+
+There are no backwards compatibility concerns related to this proposal.
+
+== Security
+
+There are no security risks related to this proposal.
+
+== Infrastructure Requirements
+
+There are no new infrastructure requirements related to this proposal.
+
+== Testing
+
+There are no testing issues related to this proposal.
+
+== References
+
+[TIP]
+====
+Provide links to any related documents.
+This will include links to discussions on the mailing list, pull requests, and meeting notes.
+====
+
+
+
